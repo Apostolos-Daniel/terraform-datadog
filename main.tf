@@ -20,3 +20,14 @@ resource "datadog_team" "foo" {
   handle      = "example-team"
   name        = "Example Team"
 }
+
+data "datadog_user" "dev_toli" {
+  filter = "dev@toli.io"
+}
+
+# Create new team_membership resource
+resource "datadog_team_membership" "foo" {
+  team_id = datadog_team.foo.id
+  user_id = data.datadog_user.dev_toli.id
+  role    = "admin"
+}

@@ -21,13 +21,22 @@ resource "datadog_team" "foo" {
   name        = "Example Team"
 }
 
-data "datadog_user" "dev_toli" {
-  filter = "dev@toli.io"
+variable "emails" {
+  type    = list(any)
+  default = ["dev@toli.io", "datadog@toli.io"]
+}
+
+data "datadog_user" "users" {
+  for_each = toset(var.emails)
+  filter   = each.key
 }
 
 # Create new team_membership resource
+# https://developer.hashicorp.com/terraform/language/meta-arguments/for_each
 resource "datadog_team_membership" "foo" {
-  team_id = datadog_team.foo.id
-  user_id = data.datadog_user.dev_toli.id
-  role    = "admin"
+  for_each   = data.datadog_user.users
+  team_id    = datadog_team.foo.id
+  user_id    = each.value.id
+  role       = "admin"
+  depends_on = [data.datadog_user.users]
 }

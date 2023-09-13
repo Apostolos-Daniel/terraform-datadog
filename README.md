@@ -59,6 +59,56 @@ resource "datadog_team" "foo" {
 
 This actually applies the changes to your Datadog account, you should have [a team](https://app.datadoghq.eu/organization-settings/teams?team_id=15196222-51c0-11ee-998b-da7ad0900005) in Datadog 
 
+## Having multiple modules using the same provider
+
+You can have multiple providers or multiple files for each provider. All provider configuration needs to be in the root directory for any child directories to receive them.
+
+You can have the provider configuration in the root `main.tf` file:
+
+```
+# Terraform 0.13+ uses the Terraform Registry:
+
+terraform {
+  required_providers {
+    datadog = {
+      source = "DataDog/datadog"
+    }
+  }
+}
+
+# Configure the Datadog provider
+provider "datadog" {
+  api_key = var.datadog_api_key
+  app_key = var.datadog_app_key
+  api_url = var.datadog_api_url
+}
+```
+
+Then you can move all the resource definition to a new direction, e.g. `datadog_teams`. This is a "module". It becomes a module when you reference it in the root file:
+
+```
+module "datadog_teams" {
+  source = "./datadog_teams"
+}
+```
+
+If you are moving the file and you have created the resources previously, terraform will update the resource name from:
+
+```
+  # datadog_user.dev_toli will be destroyed
+  # (because datadog_user.dev_toli is not in configuration)
+  - resource "datadog_user" "dev_toli" {
+```
+
+to 
+
+```
+  # module.datadog_teams.datadog_user.dev_toli will be created
+  + resource "datadog_user" "dev_toli" {
+```
+
+See [Provider Configuration](configuration#provider-configuration-1) for details.
+
 
 ## Adding an existing resource via terraform
 
@@ -184,3 +234,6 @@ Terraform will perform the following actions:
 ```
 
 This doesn't actually delete the user but it "disables" it. Tick on the Disabled Status to include it in the list, edit the user (in this case `accounts@toli.io`), and set to `Active`. Make sure that you select the appropriate Default Login Method, if you need to.
+
+## Creating a synthetic
+

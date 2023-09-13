@@ -18,3 +18,7 @@ provider "datadog" {
 module "datadog_teams" {
   source = "./datadog_teams"
 }
+
+module "datadog_synthetics" {
+  source = "./datadog_synthetics"
+}

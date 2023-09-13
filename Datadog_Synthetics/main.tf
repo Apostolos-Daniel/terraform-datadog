@@ -9,13 +9,6 @@ terraform {
   }
 }
 
-# Configure the Datadog provider
-provider "datadog" {
-  api_key = var.datadog_api_key
-  app_key = var.datadog_app_key
-  api_url = var.datadog_api_url
-}
-
 # Example Usage (Synthetics Multistep API test)
 # Create a new Datadog Synthetics Multistep API test
 resource "datadog_synthetics_test" "test_multi_step" {

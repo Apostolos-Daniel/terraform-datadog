@@ -109,6 +109,8 @@ to
 
 See [Provider Configuration](configuration#provider-configuration-1) for details.
 
+Every time you reference a new module, you need to run `terraform init` first.
+
 
 ## Adding an existing resource via terraform
 

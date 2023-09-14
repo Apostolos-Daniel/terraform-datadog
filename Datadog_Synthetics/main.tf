@@ -9,6 +9,12 @@ terraform {
   }
 }
 
+
+# Get the standard user role
+data "datadog_team" "example_team" {
+  filter_keyword = "Example team"
+}
+
 # Example Usage (Synthetics Multistep API test)
 # Create a new Datadog Synthetics Multistep API test
 resource "datadog_synthetics_test" "test_multi_step" {
@@ -16,8 +22,9 @@ resource "datadog_synthetics_test" "test_multi_step" {
   type      = "api"
   subtype   = "multi"
   status    = "live"
+  message   = "Notify @qa"
   locations = ["aws:eu-central-1"]
-  tags      = ["foo:bar", "foo", "env:test"]
+  tags      = ["foo:bar", "foo", "env:test", "team:example-team"]
 
   api_step {
     name    = "An API test on example.org"
@@ -27,6 +34,12 @@ resource "datadog_synthetics_test" "test_multi_step" {
       type     = "statusCode"
       operator = "is"
       target   = "200"
+    }
+
+    assertion {
+      type     = "body"
+      operator = "contains"
+      target   = " <title>Example Domain</title>"
     }
 
     request_definition {
@@ -50,6 +63,12 @@ resource "datadog_synthetics_test" "test_multi_step" {
       target   = "200"
     }
 
+    assertion {
+      type     = "body"
+      operator = "contains"
+      target   = " <title>Example Domain</title>"
+    }
+
     request_definition {
       method = "GET"
       url    = "http://example.org"
@@ -59,5 +78,14 @@ resource "datadog_synthetics_test" "test_multi_step" {
   options_list {
     tick_every         = 900
     accept_self_signed = true
+    monitor_name       = "Synthetic monitor"
+    monitor_priority   = 1
+    retry {
+      count    = 2
+      interval = 300
+    }
+    monitor_options {
+      renotify_interval = 120
+    }
   }
 }

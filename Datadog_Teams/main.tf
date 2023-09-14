@@ -24,9 +24,9 @@ data "datadog_role" "datadog_standard_role" {
 
 # Set the user's role to Standard and give them a name
 resource "datadog_user" "dev_toli" {
-  email = "dev@toli.io"
-  name = "Toli"
-  roles = [ data.datadog_role.datadog_standard_role.id ]
+  email                = "dev@toli.io"
+  name                 = "Toli"
+  roles                = [data.datadog_role.datadog_standard_role.id]
   send_user_invitation = true
 }
 

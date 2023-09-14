@@ -112,6 +112,18 @@ See [Provider Configuration](configuration#provider-configuration-1) for details
 Every time you reference a new module, you need to run `terraform init` first.
 
 
+## Using pre-commit hooks
+
+You can use various useful git pre-commit hooks. 
+
+I used [this repo](https://github.com/antonbabenko/pre-commit-terraform#how-to-install) that includes a few useful terraform hooks.
+
+- terraform_fmt: formats .tf files accordingly
+- terraform_docs: auto-generates documentation
+- terraform_validate: runs the `terraform validate` command, this is sensible to run before commiting
+
+Run `pre-commit run -a` locally if you want to run the hooks without commiting.
+
 ## Adding an existing resource via terraform
 
 You will probably get into a scenario where you create an existing Datadog resource (that was created via the UI). This begs some quesitons:
@@ -239,3 +251,36 @@ This doesn't actually delete the user but it "disables" it. Tick on the Disabled
 
 ## Creating a synthetic
 
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+No providers.
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_datadog_synthetics"></a> [datadog\_synthetics](#module\_datadog\_synthetics) | ./datadog_synthetics | n/a |
+| <a name="module_datadog_teams"></a> [datadog\_teams](#module\_datadog\_teams) | ./datadog_teams | n/a |
+
+## Resources
+
+No resources.
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_datadog_api_key"></a> [datadog\_api\_key](#input\_datadog\_api\_key) | Datadog API Key | `string` | n/a | yes |
+| <a name="input_datadog_api_url"></a> [datadog\_api\_url](#input\_datadog\_api\_url) | Datadog API URL | `string` | `"https://app.datadoghq.eu"` | no |
+| <a name="input_datadog_app_key"></a> [datadog\_app\_key](#input\_datadog\_app\_key) | Datadog Application Key | `string` | n/a | yes |
+
+## Outputs
+
+No outputs.
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

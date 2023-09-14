@@ -251,6 +251,11 @@ This doesn't actually delete the user but it "disables" it. Tick on the Disabled
 
 ## Creating a synthetic
 
+You can use example synthetic resources on the [official terraform datadog provider documentation](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test#nested-schema-for-options_listmonitor_o) and then customise to suit your needs. 
+
+### Multi-line message
+
+You most likely will need a multi-line message in your monitor. The way to do this is by using the so-called "heredoc" style of string literal that terraform supports.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements

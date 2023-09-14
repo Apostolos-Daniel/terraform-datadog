@@ -14,7 +14,7 @@ data "datadog_synthetics_locations" "test" {
 }
 
 locals {
-  synthetic_location_ireland = [for key, name in data.datadog_synthetics_locations.test.locations : key if name == "Ireland (AWS)"]
+  synthetic_location_ireland = [for key, name in data.datadog_synthetics_locations.test.locations : key if name == "Ireland (AWS) "]
 }
 
 

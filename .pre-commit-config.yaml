@@ -9,5 +9,4 @@ repos:
         - --hook-config=--add-to-existing-file=true     # Boolean. true or false
         - --hook-config=--create-file-if-not-exist=true # Boolean. true or false
     - id: terraform_validate
-    - id: terraform_plan
 

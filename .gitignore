@@ -1,3 +1,7 @@
+# yarn
+node_modules/*
+yarn-error.log
+
 # Local .terraform directories
 **/.terraform/*
 

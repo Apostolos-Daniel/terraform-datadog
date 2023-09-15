@@ -13,3 +13,8 @@ variable "datadog_api_url" {
   description = "Datadog API URL"
   default     = "https://app.datadoghq.eu"
 }
+
+variable "default_tags" {
+  type        = map(any)
+  description = "Default tags for Datadog resources"
+}

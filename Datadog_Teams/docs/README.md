@@ -19,8 +19,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [datadog_team.foo](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/team) | resource |
-| [datadog_team_membership.foo](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/team_membership) | resource |
+| [datadog_team.example_team](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/team) | resource |
+| [datadog_team_membership.example_team_membership](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/team_membership) | resource |
 | [datadog_user.dev_toli](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/user) | resource |
 | [datadog_role.datadog_standard_role](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/data-sources/role) | data source |
 | [datadog_user.users](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/data-sources/user) | data source |

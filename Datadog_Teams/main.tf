@@ -6,7 +6,7 @@ terraform {
   }
 }
 
-resource "datadog_team" "foo" {
+resource "datadog_team" "example_team" {
   description = "Team description"
   handle      = "example-team"
   name        = "Example Team"
@@ -46,9 +46,9 @@ data "datadog_user" "users" {
 
 # Create new team_membership resource
 # https://developer.hashicorp.com/terraform/language/meta-arguments/for_each
-resource "datadog_team_membership" "foo" {
+resource "datadog_team_membership" "example_team_membership" {
   for_each   = data.datadog_user.users
-  team_id    = datadog_team.foo.id
+  team_id    = datadog_team.example_team.id
   user_id    = each.value.id
   role       = "admin"
   depends_on = [data.datadog_user.users]

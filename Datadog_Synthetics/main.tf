@@ -1,6 +1,5 @@
 
 # Terraform 0.13+ uses the Terraform Registry:
-
 terraform {
   required_providers {
     datadog = {
@@ -14,13 +13,15 @@ data "datadog_synthetics_locations" "test" {
 }
 
 locals {
-  synthetic_location_ireland = [for key, name in data.datadog_synthetics_locations.test.locations : key if name == "Ireland (AWS) "]
+  synthetic_location_ireland = [for key, name in data.datadog_synthetics_locations.test.locations : key if name == "Ireland (AWS)"]
+  // this converts a map of key/value pairs of tags, e.g. key=created_by, value=terraform 
+  // to a list of string key/value pairs with format key:value, e.g. 'created_by:terraform'
+  default_tags_list = [for key, value in var.default_tags : "${key}:${value}"]
 }
 
-
-# Get the standard user role
+# Get the team
 data "datadog_team" "example_team" {
-  filter_keyword = "Example team"
+  team_id = "e1dd94ac-53fc-11ee-a877-da7ad0900005" // "Example Team" https://app.datadoghq.eu/organization-settings/teams?team_id=bd9527ea-528f-11ee-b38e-da7ad0900005
 }
 
 
@@ -39,7 +40,7 @@ resource "datadog_synthetics_test" "test_multi_step" {
   line 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
 EOT
   locations = local.synthetic_location_ireland
-  tags      = ["foo:bar", "foo", "env:test", "team:${data.datadog_team.example_team.handle}"]
+  tags      = concat(["foo:bar", "foo", "env:test", "team:${data.datadog_team.example_team.handle}"], local.default_tags_list)
 
   api_step {
     name    = "An API test on example.org"

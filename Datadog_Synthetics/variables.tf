@@ -1,4 +1,4 @@
-variable "default_tags" {
+variable "tags" {
   type        = map(any)
-  description = "Default tags for Datadog resources"
+  description = "Default tags for synthetics"
 }

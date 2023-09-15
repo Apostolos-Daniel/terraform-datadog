@@ -22,5 +22,5 @@ module "datadog_teams" {
 module "datadog_synthetics" {
   source = "./datadog_synthetics"
 
-  default_tags = var.default_tags
+  tags = var.default_tags
 }

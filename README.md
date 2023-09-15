@@ -282,3 +282,51 @@ alias tfm='terraform fmt -recursive'
 ```
 
 See more [tips and trikcs](https://dev.to/svasylenko/terraform-cli-shortcuts-42gj)
+
+## Setting default variables
+
+If you want to set variables that have a default value, you will have to create them in the [variables.tf](./variables.tf) file in the root directory. E.g.:
+
+```
+variable "default_tags" {
+  type        = map(any)
+  description = "Default tags for Datadog resources"
+}
+```
+
+Then if you want to give them a default value, the best approach is to use a separate `.tfvars` file, e.g. [tags.auto.tfvars](tags.auto.tfvars). This will be picked up automatically by terraform due to the naming convention of using the "auto" prefix in the file name (`auto.tfvars`). 
+
+```
+default_tags = {
+  created_by = "terraform"
+}
+```
+
+You now have a variable that you can reference in the root directory but to be able to reference it in a module, you have to "pass it through" in your module declaration:
+
+```
+module "datadog_synthetics" {
+  source = "./datadog_synthetics"
+
+  tags = var.default_tags
+}
+```
+
+You can use a different variable name here as it's actually declared separately in the module itself, e.g. in [datadog_synthetics/main.tf](datadog_synthetics/main.tf):
+
+```
+variable "tags" {
+  type        = map(any)
+  description = "Default tags for synthetics"
+}
+```
+
+Now, you can use this variable by referencing it as `var.tags`, e.g.:
+
+```
+locals {
+  tags_list = [for key, value in var.tags : "${key}:${value}"]
+}
+```
+
+Alternatively, you could consider extracting the variable definition in `main.tf` of the module into a `variables.tf` file, for better clarity of concerns. 

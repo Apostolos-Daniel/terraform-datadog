@@ -27,7 +27,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_default_tags"></a> [default\_tags](#input\_default\_tags) | Default tags for Datadog resources | `map(any)` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | Default tags for synthetics | `map(any)` | n/a | yes |
 
 ## Outputs
 

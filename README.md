@@ -266,3 +266,19 @@ You most likely will need a multi-line message in your monitor. The way to do th
   line 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
 EOT
 ```
+
+## Terraform tips and tricks
+
+You will end up typing `terraform` a lot so it's worth creating some alias. 
+
+Aliases I use:
+
+```
+alias tf='terraform'
+alias tfv='terraform validate'
+alias tfi='terraform init'
+alias tfp='terraform plan' 
+alias tfm='terraform fmt -recursive'
+```
+
+See more [tips and trikcs](https://dev.to/svasylenko/terraform-cli-shortcuts-42gj)

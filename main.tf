@@ -24,3 +24,8 @@ module "datadog_synthetics" {
 
   tags = var.default_tags
 }
+
+
+module "datadog_monitor_config_policy" {
+  source = "./modules/datadog_monitor_config_policy"
+}

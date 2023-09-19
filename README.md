@@ -331,4 +331,28 @@ locals {
 
 Alternatively, you could consider extracting the variable definition in `main.tf` of the module into a `variables.tf` file, for better clarity of concerns. 
 
-test
+## Add tagging policies
+
+You can add tagging policies to your Datadog account via terraform. This is useful if you want to enforce tagging policies on your Datadog account.
+
+You can create a tagging policy via terraform:
+
+```
+mkdir modules
+mkdir modules/datadog_monitor_config_policy
+touch modules/datadog_monitor_config_policy/main.tf
+terraform init
+```
+
+And add the following to `main.tf` via bash:
+
+```
+resource "datadog_monitor_config_policy" "test" {
+  policy_type = "tag"
+  tag_policy {
+    tag_key          = "env"
+    tag_key_required = false
+    valid_tag_values = ["staging", "prod"]
+  }
+}
+```

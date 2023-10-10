@@ -209,7 +209,6 @@ Terraform will perform the following actions:
     }
 
 Plan: 0 to add, 1 to change, 0 to destroy.
-
 ```
 
 For the second option, you have to remove the user from terraform. This will remove the user from Datadog entirely. Commented out rather than deleting to demonstrate it is removed.

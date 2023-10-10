@@ -29,3 +29,8 @@ module "datadog_synthetics" {
 module "datadog_monitor_config_policy" {
   source = "./modules/datadog_monitor_config_policy"
 }
+
+
+module "datadog_credentials" {
+  source = "./modules/datadog_credentials"
+}

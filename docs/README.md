@@ -13,6 +13,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_datadog_credentials"></a> [datadog\_credentials](#module\_datadog\_credentials) | ./modules/datadog_credentials | n/a |
 | <a name="module_datadog_monitor_config_policy"></a> [datadog\_monitor\_config\_policy](#module\_datadog\_monitor\_config\_policy) | ./modules/datadog_monitor_config_policy | n/a |
 | <a name="module_datadog_synthetics"></a> [datadog\_synthetics](#module\_datadog\_synthetics) | ./datadog_synthetics | n/a |
 | <a name="module_datadog_teams"></a> [datadog\_teams](#module\_datadog\_teams) | ./datadog_teams | n/a |

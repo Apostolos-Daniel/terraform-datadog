@@ -34,3 +34,10 @@ module "datadog_monitor_config_policy" {
 module "datadog_credentials" {
   source = "./modules/datadog_credentials"
 }
+
+# AWS Integration
+module "aws-integration" {
+  source = "./modules/aws-integration"
+
+  aws-account-id = 643476110649
+}
